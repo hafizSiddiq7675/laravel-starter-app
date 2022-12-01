@@ -36,7 +36,7 @@ class LoginController extends Controller
         $user =  auth::user();
         $role = Helper::role($user);
 
-        if ($role->name = 'Admin') {
+        if ($role->name == 'Admin') {
             return '/home';
         }
         if ($role->name == 'Manager') {

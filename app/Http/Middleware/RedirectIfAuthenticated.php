@@ -6,6 +6,7 @@ use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Libraries\Helper;
 
 class RedirectIfAuthenticated
 {
@@ -23,7 +24,18 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                // return redirect(RouteServiceProvider::HOME);
+                $user =  auth::user();
+                $role = Helper::role($user);
+
+                if ($role->name == 'Admin') {
+                    return redirect(RouteServiceProvider::HOME);
+                }
+                if ($role->name == 'Manager') {
+
+                    return '/manager';
+                }
+                return redirect('/user');
             }
         }
 

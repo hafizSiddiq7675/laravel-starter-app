@@ -18,12 +18,12 @@ Route::get('/', function () {
 });
 
 Route::get('/manager', function () {
-    echo '<pre>'; print_r('manager'); exit;
+    return view('manager');
 });
 
 Route::get('/user', function () {
-    echo '<pre>'; print_r('user'); exit;
-})->name('user.index');
+    return view('user');
+});
 
 
 
